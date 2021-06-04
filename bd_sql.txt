@@ -1,0 +1,70 @@
+CREATE TABLE Жанры
+(
+	Код_жанра            INTEGER NOT NULL,
+	Название             VARCHAR(20) NOT NULL
+);
+
+ALTER TABLE Жанры
+ADD PRIMARY KEY (Код_жанра);
+
+CREATE TABLE Отзывы
+(
+	Код_отзыва           INTEGER NOT NULL,
+	Текст_отзыва         TEXT NULL,
+	Дата_добавления      DATE NULL,
+	Код_пользователя     INTEGER NOT NULL,
+	Код_фильма           INTEGER NOT NULL,
+	Оценка               INTEGER NOT NULL
+);
+
+ALTER TABLE Отзывы
+ADD PRIMARY KEY (Код_отзыва);
+
+
+
+CREATE TABLE Пользователи
+(
+	Код_пользователя     INTEGER NOT NULL,
+	Фамилия              VARCHAR(20) NOT NULL,
+	Имя                  VARCHAR(20) NOT NULL,
+	email                VARCHAR(20) NOT NULL,
+	Номер_телефона       VARCHAR(11) NOT NULL
+);
+
+ALTER TABLE Пользователи
+ADD PRIMARY KEY (Код_пользователя);
+
+CREATE TABLE Режиссеры
+(
+	Код_режиссера        INTEGER NOT NULL,
+	Имя                  VARCHAR(20) NOT NULL,
+	Фамилия              VARCHAR(20) NOT NULL
+);
+
+ALTER TABLE Режиссеры
+ADD PRIMARY KEY (Код_режиссера);
+
+CREATE TABLE Фильмы
+(
+	Код_фильма           INTEGER NOT NULL,
+	Название             VARCHAR(20) NULL,
+	Год_выпуска          INTEGER NULL,
+	Страна               VARCHAR(20) NULL,
+	Код_жанра            INTEGER NOT NULL,
+	Код_режиссера        INTEGER NOT NULL
+);
+
+ALTER TABLE Фильмы
+ADD PRIMARY KEY (Код_фильма);
+
+ALTER TABLE Отзывы
+ADD FOREIGN KEY R_3 (Код_пользователя) REFERENCES Пользователи (Код_пользователя);
+
+ALTER TABLE Отзывы
+ADD FOREIGN KEY R_4 (Код_фильма) REFERENCES Фильмы (Код_фильма);
+
+ALTER TABLE Фильмы
+ADD FOREIGN KEY R_8 (Код_жанра) REFERENCES Жанры (Код_жанра);
+
+ALTER TABLE Фильмы
+ADD FOREIGN KEY R_9 (Код_режиссера) REFERENCES Режиссеры (Код_режиссера);
